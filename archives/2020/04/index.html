@@ -43,9 +43,9 @@
     }
 	
     const CONFIG_LEACLOUD_COUNT = {
-      enable: false,
-	  appId: 'AU8...',
-	  appKey: '4cU...',
+      enable: true,
+	  appId: 'Sem2xrYMOFn2afpL8BtmdJ8S-gzGzoHsz',
+	  appKey: '706eBfGLI34nQC7CLGgJAJQt',
 	  serverURLs: 'http' || ' '
     }
   </script>
@@ -162,7 +162,7 @@
 	
 		<li>
 			<a href="https://www.researchgate.net/profile/Mengjie-Zheng-4" target="_blank">
-				<span class="iconify" data-icon="simple-icons:researchgate" data-inline="false"></span>
+				ResearchGate
 			</a>
 		</li>
 	
@@ -218,12 +218,12 @@
         <ul>
             
                 <li>
-                    <a href="/2021/06/25/demo/">
+                    <a href="/2021/06/25/%E5%A4%8F%E3%81%AF%E7%B5%82%E3%82%8F%E3%81%A3%E3%81%9F/">
             			<em year="2021">
                             06-25
                         </em>
         			    <span itemprop="name">
-                            demo
+                            夏は終わった
                         </span>
         			    
                     </a>
@@ -392,21 +392,6 @@
 	<!-- busuanzi -->
 	<!-- busuanzi -->
 
-		
-	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-	
-
-		<span id="busuanzi_container_site_pv">
-	    	本站总访问量<span id="busuanzi_value_site_pv"></span>次
-		</span>
-
-		<span id="busuanzi_container_site_uv">
-	  		本站访客数<span id="busuanzi_value_site_uv"></span>人次
-		</span>
-		
-	
-
-
 
 
 			<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s">简体</a> 
@@ -416,25 +401,32 @@
 </footer>
 		
 	<!-- Local or hitokoto! -->
-
-	
-<script src="/plugin/motto/motto.js"></script>
-
-	
-	<script type="text/javascript">
+ 
+	<!-- 现代写法，推荐 -->
+	<!-- 兼容低版本浏览器 (包括 IE)，可移除 -->
+	<script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+	<!--End-->
+	<script>
 		(function motto(){
-			let mottoText = getMingYanContent().split('</br> - </br>'),
-			
-			mottoTextContent = mottoText[0]?mottoText[0]:'请刷新...',
-			
-			mottoTextFrom = mottoText[1]?mottoText[1]:'one/一个';
-			
-			mottoTextContent = mottoTextContent.trim().substring(0, 100);
-		
-			$("#motto-content").html( mottoTextContent);
-			$("#motto-author").html( mottoTextFrom  );
-		})();	
-	</script>	
+			fetch('https://v1.hitokoto.cn/?c=d')
+				.then(function (res){
+				return res.json();
+			}).then(function (data) {
+				$("#motto-content").html( data.hitokoto?data.hitokoto:'请刷新...' );
+				
+				let	mottoAuthor =' ';
+					mottoAuthor += data.creator?data.creator:'一言';
+					mottoAuthor += "　/　";
+					mottoAuthor += data.from?data.from:'一言官网';
+					
+				$("#motto-author").html( mottoAuthor );
+			})
+			.catch(function (err) {
+				console.error(err);
+			})			
+		})();
+	</script>
 
 
 
@@ -483,6 +475,11 @@
 -->
 
 
+  
+<script src="/plugin/leancloud/av-min.js"></script>
+<script src="/js/leancloud-count.js"></script>
+
+
 	
 
   
@@ -510,6 +507,21 @@
 		<div class="local-search-footer">
 			<div class="topN-post">				
 				
+
+   
+	<div id="topN">
+		<div class="topN-title" data-title= "热门文章"></div> 
+	</div>
+	
+    <script>
+        var limitCount = 10;
+        if( $('#topN').length ){
+            setTimeout(function() {
+                topNPost(limitCount);
+			}, 3000);
+        }
+    </script>
+   
 								
 			</div>
 		</div>
